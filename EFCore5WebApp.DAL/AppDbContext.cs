@@ -19,6 +19,19 @@ namespace EFCore5WebApp.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Person>().HasData(new List<Person>
+            {
+                new Person { Id = 1, FirstName = "John", LastName = "Smith", EmailAddress = "john@smith.com"},
+                new Person { Id = 2, FirstName = "Susan", LastName = "Jones", EmailAddress = "susan@jones.com"}
+            });
+
+            modelBuilder.Entity<Address>().HasData(new List<Address>
+            {
+                new Address() { Id = 1 , AddressLine1 = "123 Test St", AddressLine2 = "", City = "Beverly Hills", State = "CA", ZipCode = "90210", PersonId = 1, Country = "USA"},
+                new Address() { Id = 2 , AddressLine1 = "123 Michigan Ave", AddressLine2 = "", City = "Chicago", State = "IL", ZipCode = "60612", PersonId = 2, Country = "USA"},
+                new Address() { Id = 3 , AddressLine1 = "100 1st St", AddressLine2 = "", City = "Chicago", State = "IL", ZipCode = "60612", PersonId = 2, Country = "USA"},
+            });
+
             modelBuilder.Entity<LookUp>().HasData(new List<LookUp>
             {
                 new LookUp() {Code = "AL", Description = "Alabama", LookUpType = LookUpType.State},
@@ -74,6 +87,28 @@ namespace EFCore5WebApp.DAL
                 new LookUp() {Code = "WY", Description = "Wyoming", LookUpType = LookUpType.State},
                 new LookUp() {Code = "USA", Description = "United States of America", LookUpType = LookUpType.Country},
             });
+        }
+
+        protected Person CreateClarkKent()
+        {
+            return new Person
+            {
+                FirstName = "Clark",
+                LastName = "Kent",
+                EmailAddress = "clark@dailybugle.com",
+                Addresses = new List<Address>
+                {
+                    new Address
+                    {
+                        AddressLine1 = "1234 Fake Street",
+                        AddressLine2 = "Suite 1",
+                        City = "Chicago",
+                        State = "IL",
+                        ZipCode = "60652",
+                        Country = "United States"
+                    }
+                }
+            };
         }
     }
 }
