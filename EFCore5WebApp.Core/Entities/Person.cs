@@ -23,5 +23,8 @@ namespace EFCore5WebApp.Core.Entities
         public List<Address> Addresses { get; set; } = new List<Address>();
         [NotMapped]
         public string FullName => $"{FirstName} {LastName}";
+        public List<Person> Parents { get; set; } = new List<Person>();
+        public List<Person> Children { get; set; } = new List<Person>();
+        public DateTime CreatedOn { get; set; }
     }
 }
